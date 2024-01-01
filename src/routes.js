@@ -3,7 +3,6 @@ import { randomUUID } from 'node:crypto'
 import { buildRoutePath } from "./utils/build-route-path.js"
 
 const database = new Database()
-
 export const routes = [{
   method: 'GET',
   path: buildRoutePath('/users'),
@@ -34,6 +33,8 @@ export const routes = [{
 {
   method: 'DELETE',
   path: buildRoutePath('/users/:id'),
-  handler: (req, res) => {}
+  handler: (req, res) => {
+    return res.end()
+  }
 }
 ]
