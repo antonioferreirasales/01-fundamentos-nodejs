@@ -18,10 +18,20 @@ export class Database {
     fs.writeFile(databasePath, JSON.stringify(this.#database))
   }
 
-  select (table) {
-    const date = this.#database[table] ?? []
+  select (table, search) {
+    let data = this.#database[table] ?? []
 
-    return date
+    if (search) {
+      data = data.filter(row => {
+        return Object.entries(search).some(([key, value]) => {
+          return row[key]
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        })
+      })
+    }
+
+    return data
   }
 
   insert (table, data) {
